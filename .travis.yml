@@ -24,5 +24,13 @@ script:
   2
 - sfdx force:org:display -u ciorg
 - sfdx force:source:push -u ciorg
-- sfdx force:apex:test:run -u ciorg --wait 10
+- sfdx force:apex:test:run -u ciorg --classnames mytest --wait 10
 - sfdx force:org:delete -u ciorg -p
+
+script:
+- sfdx force:org:create -v HubOrg2 -s -f config/project-scratch-def.json -a ciorg2 --wait
+  2
+- sfdx force:org:display -u ciorg2
+- sfdx force:source:push -u ciorg2
+- sfdx force:apex:test:run -u ciorg2 --classnames mytest2 --wait 10
+- sfdx force:org:delete -u ciorg2 -p
